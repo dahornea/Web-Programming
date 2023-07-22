@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Add superhero</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="script.js"></script>
+
+</head>
+
+<body>
+    <button class ="home" type ="button" onclick ="location.href = './index.html'">Home</button>
+    <br>
+
+    <section class="add_superhero">
+        <form action="add.php" method="post">
+            <input id="name" type="text" name="name" placeholder="Name" required>
+            <input id="powers" type = "text" name="powers" placeholder="Powers" required>
+        </form>
+    </section>
+
+    <section class = "display_add">
+        <br>
+        <table class="display-table">
+            <thead>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Powers</th>
+            </thead>
+
+            <tbody>
+
+                <?php
+                $con = OpenConnection();
+                $result_set = mysqli_query($con, "SELECT * FROM superhero");
+                while($row = mysqli_fetch_array($result_set))
+                {
+                    ?>
+                    <tr>
+                        <td><?php echo $row['id'] ?></td>
+                        <td><?php echo $row['name'] ?></td>
+                        <td><?php echo $row['powers'] ?></td>
+                    </tr>
+                    <?php
+                }
+            </tbody>
+        </table>
+    </section>
+</body>
+</html>

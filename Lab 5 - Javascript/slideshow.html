@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Slideshow Example</title>
+	<style>
+		img {
+			max-width: 100%;
+			height: auto;
+			display: none;
+		}
+		button {
+			margin-top: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<img src="image1.png" alt="Image 1">
+		<img src="image2.png" alt="Image 2">
+		<img src="image3.png" alt="Image 3">
+		<img src="image4.png" alt="Image 4">
+	</div>
+	<div>
+		<button id="play-pause">Play</button>
+		<label>
+			<input type="checkbox" id="replay"> Replay after last picture
+		</label>
+		<label>
+			Select time (in seconds):
+			<select id="time">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+			</select>
+		</label>
+	</div>
+	<div>
+		Time remaining: <span id="timer"></span>
+	</div>
+	<script>
+		const images = document.querySelectorAll('img');
+		const playPauseButton = document.querySelector('#play-pause');
+		const replayCheckbox = document.querySelector('#replay');
+		const timeSelect = document.querySelector('#time');
+		let currentIndex = 0;
+		let timerId = null;
+		let time = timeSelect.value * 1000;
+
+		// Show the first image and hide the others
+		images[0].style.display = 'block';
+		for (let i = 1; i < images.length; i++) {
+			images[i].style.display = 'none';
+		}
+
+		// Function to show the next image in the slideshow
+		function showNextImage() {
+			images[currentIndex].style.display = 'none';
+			currentIndex++;
+			if (currentIndex >= images.length) {
+				if (replayCheckbox.checked) {
+					currentIndex = 0;
+				} else {
+                    currentIndex = 0;
+					stopSlideshow();
+					return;
+				}
+			}
+
+			images[currentIndex].style.display = 'block';
+			startTimer();
+		}
+
+		// Function to start the slideshow timer
+		function startTimer() {
+			const time = timeSelect.value * 1000;
+			timerId = setTimeout(showNextImage, time);
+		}
+
+		// Function to stop the slideshow timer
+		function stopTimer() {
+			clearTimeout(timerId);
+			timerId = null;
+		}
+		
+		// Function to show the time remaining on the slideshow
+		function displayTimer(){
+			const time = timeSelect.value * 1000;
+			let timeRemaining = time / 1000;
+			timerId = setInterval(function() {
+				timeRemaining--;
+				if (timeRemaining == 0) {
+					timeRemaining = 5000 / 1000;
+				}
+				document.getElementById("timer").innerText = timeRemaining;
+			}, 1000);
+		
+		}
+		// Function to start the slideshow
+		function startSlideshow() {
+			playPauseButton.textContent = 'Pause';
+			startTimer();
+		}
+
+		// Function to stop the slideshow
+		function stopSlideshow() {
+			playPauseButton.textContent = 'Play';
+			stopTimer();
+		}
+
+		// Event listener for the play/pause button
+		playPauseButton.addEventListener('click', function() {
+			if (timerId === null) {
+				startSlideshow();
+				displayTimer();
+			} else {
+				stopSlideshow();
+			}
+		});
+
+		// Event listener for the time select
+		timeSelect.addEventListener('change', function() {
+			if (timerId !== null) {
+				displayTimer();
+				stopTimer();
+				startTimer();
+			}
+		});
+	</script>
+</body>
+</html>

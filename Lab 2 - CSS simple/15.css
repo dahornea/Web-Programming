@@ -1,0 +1,91 @@
+/* 15. Write a web page which should contain a rise-up horizontal menu (as oposed to a drop-down horizontal menu). 
+The menu should be displayed in the bottom of the page and should contain at least 5 items (displayed horizontaly, side by side) and each item should contain at least 5 commands.*/
+
+#menu * { 
+    font: 12px Arial, Helvetica, sans-serif;; 
+    list-style-type: none;
+}
+
+#menu {
+    line-height: 10px; 
+    margin: auto;
+    width:900px;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#menu a { 
+    display: block; 
+    text-decoration: none; 
+    color: black;
+}
+
+#menu a:hover { 
+    background: rgb(75, 38, 136);
+}
+
+
+#menu ul li ul li {
+    width: 170px; 
+    border: none; 
+    color: black;  
+    padding-top: 0px; 
+    padding-bottom:0px; 
+    padding-left: 0px; 
+    padding-right: 0px; 
+    background: rgb(45, 96, 206);
+}
+
+#menu ul li ul li a { 
+    font: 11px Comic Sans MS; 
+    font-weight: normal; 
+    font-variant: small-caps; 
+    padding: 10px;
+}
+
+#menu ul li {
+    float: left; 
+    width: 170px; 
+    font-weight: bold;
+    background: rgb(15, 160, 148);
+}
+
+#menu ul li a { 
+    font-weight: bold;
+    padding: 15px 10px;
+}
+
+#menu li { 
+    position:relative; 
+}
+
+#menu ul li ul, #menu:hover ul li ul, #menu:hover ul li:hover ul li ul{ 
+    display:none;
+    list-style-type:none; 
+    width: 190px;
+}
+
+#menu:hover ul, #menu:hover ul li:hover ul, #menu:hover ul li:hover ul li:hover ul { 
+    display:block;
+}
+
+#menu:hover ul li:hover ul li:hover ul { 
+    position: absolute;
+    margin-left: 120px;
+    margin-top: -22px;
+    font: 10px;
+}
+
+#menu:hover ul li:hover ul { 
+    position: absolute;
+    margin-top: 1px;
+    font: 10px;
+}
+
+#menu>ul>li:hover>ul { 
+    bottom:100%;
+    border-bottom: 1px hidden;
+}
+

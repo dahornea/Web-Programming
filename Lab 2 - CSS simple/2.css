@@ -1,0 +1,38 @@
+/*2. Write a web page in which you should present a vertical bar graph (each bar should be displayed with a different collor and it shoud have a different value/hight). 
+The graph should also have a horizontal line (OX) and a vertical line (OY).*/
+
+.graph-container .horizontal-line {
+    width: 100%;
+    height: 2px;
+    position: absolute;
+    bottom: 50px;
+    border:none;
+    border-top: 5px dashed black;
+  }
+
+.graph-container .vertical-line {
+    width: 2px;
+    height: calc(100% - 50px);
+    position: absolute;
+    left: 50px;
+    border: none;
+    border-left: 5px dashed black;
+  }
+
+
+.graph-container .bar {
+    width: 50px;
+    height: 0;
+    position: absolute;
+    bottom: 50px;
+    transition: all 0.5s ease;
+  }
+
+.graph-container .label {
+    position: absolute;
+    bottom: -20px;
+    text-align: center;
+    width: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
